@@ -1,79 +1,50 @@
-console.log("hello");
-let rNd = Math.floor(Math.random() * 40);
-let birdList = [];
-let birdSong = "";
-//let audioPlayer = document.getElementById("audioSource");
-// Waits for the DOM to be fully loaded and then displays an initial joke.
-//document.addEventListener("DOMContentLoaded", getAndDisplayNewJoke);
+const birdList = [
+  ["Lark", "//xeno-canto.org/773176"],
+  ["Robin", "//xeno-canto.org/7756476"],
+  ["Blackbird", "//xeno-canto.org/7463736"],
+];
 
-// Retrieves the "bird button" button
-const birdButton = document.getElementById("newBirdSong");
+function randomOfList (list) {
+  return Math.floor(Math.random() * list.length);
+}
+const match = birdList[0];
 
-async function fetchData() {
-  try {
-    const response = await fetch(
-      `https://xeno-canto.org/api/2/recordings?query=q:">C"+cnt:"uk"+grp:"birds"+type:"song"+len:"<10"`
-    ); // q: quality, cnt: country, grp: species, type: predefined presumably songbird?.
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    const birdArray = await data;
-    //console.log(birdList);
-    // Handle your data
-    // return data;
-    let rNd = Math.floor(Math.random() * 40);
-    birdList.push([data.recordings[rNd].en, data.recordings[rNd]["url"]]);
-    console.log(birdList);
-    //birdSong = birdList[1][1];
-    //birdList.push(data.recordings[Math.floor(Math.random()*40)].en); //we get 2?????
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    // Handle any errors
-  }
+const iframe = document.getElementById("iframe");
+const newBirdsong = document.getElementById("newBirdSong");
+newBirdsong.addEventListener("click", () => {
+  iframe.src = `${birdList[0][1]}/embed`
+  ///xeno-canto.org/773176/embed
+});
+
+//grab buttons and set listeners
+const buttonA = document.getElementById("buttonA");
+const buttonB = document.getElementById("buttonB");
+const buttonC = document.getElementById("buttonC");
+
+//set content of the buttons to bird names from the array, randomly
+// note: for now the code is repeated rather than looping because we'll have to grab the buttons
+// differently (as an array) if we want to loop over them)
+
+function setButtonToDisplayBirdNames(button){
+  let index = Math.floor(Math.random() * birdList.length);
+  button.textContent = birdList[index][0];
+  birdList.splice(index, 1);
 }
 
-let bird = fetchData();
+setButtonToDisplayBirdNames(buttonA);
+setButtonToDisplayBirdNames(buttonB);
+setButtonToDisplayBirdNames(buttonC);
 
-//pull three bird objects
-//console.log(data);
 
-// birdButton.addEventListener("click", (audioPlayer) => {
-//   // Check if birdList has any data
-//   if (birdList.length > 0) {
-//     // Get the first bird's `en` (English name)
-//     const firstBirdName = birdList[0][0];
-//     const firstBirdSong = birdList[0][1];
-//     let audioPlayer = document.getElementById("audioSource");
-//     audioPlayer.src = firstBirdSong;
-//     console.log(audioPlayer);
-//     const attachedName = document.getElementById("birdSong");
-//     attachedName.textContent = firstBirdName;
-//     //console.log("First bird's name:", firstBirdName, firstBirdSong);
-//   } else {
-//     console.log("Bird list is empty. Wait for the data to load!");
-//   }
-// });
 
-// function retrieveBirdSong() {
-//   const randomIndex = Math.floor(Math.random() * data.length);
-//   return jokes[randomIndex];
-// }
-
-// function displayBirdSong(bird) {
-//   const birdSongElement = document.getElementById("birdSong");
-//   birdSongElement.textContent = bird.birdSong;
-// }
-
-// Hear the sound
-//audio player triggers on load plays once. or click button to hear sound/play game.
-
-//  guess bird / bird name
-//get 3 randomised bird names with
-
-//Get correct/incorrect
-
-// when clicked
-
-// if the value is true then display correct
-// else display unlucky
+const newBirdSongBtn = document.querySelector("#newBirdSong");
+const nameBtnDiv = document.querySelector(".nameBtnBox");
+nameBtnDiv.addEventListener("click", (e) => {
+  if (e.target.textContent === match[0]) {
+    nameBtnDiv.textContent =
+      "YES! That's the bird! Press New Song to play again";
+  } else {
+    nameBtnDiv.textContent = "Aww, try again :(";
+  }
+  playAgain();
+});

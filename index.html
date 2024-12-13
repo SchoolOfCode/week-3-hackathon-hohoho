@@ -12,11 +12,11 @@
       <header class="title">
         <h1>Song Birds</h1>
         <img
-        src="Images/greyBird.svg"
-        alt="Sweet, grey and yellow cartoon songbird"
-        id="greyBird"
-        width="50px"
-      />
+          src="Images/greyBird.svg"
+          alt="Sweet, grey and yellow cartoon songbird"
+          id="greyBird"
+          width="50px"
+        />
         <img
           src="Images/greenBird.svg"
           alt="Sweet, green, cartoon songbird"
@@ -27,30 +27,32 @@
       <section class="birdBox">
         <div id="iframeBox">
           <iframe
-            src="https://xeno-canto.org/773176/embed"
+            src="//xeno-canto.org/773176/embed"
             id="iframe"
             scrolling="no"
             frameborder="0"
             width="340"
-            height="220";
+            height="220"
+            ;
           ></iframe>
         </div>
-        <div id="audio">
+        <!-- <div id="audio">
           <audio controls id="birdMP3">
             <source id="audioSource" src="" type="audio/mpeg" />
           </audio>
-          <p id="birdSong">Loading...</p>
-        </div>
+          
+        </div> -->
         <article class="btnBox">
+          <p id="birdSong">Loading...</p>
           <button type="button" id="newBirdSong">New Song</button>
           <article class="nameBtnBox">
-            <button type="button" class="birdName a">Name1</button>
-            <button type="button" class="birdName b">Name2</button>
-            <button type="button" class="birdName c">Name3</button>
+            <button type="button" id="buttonA">Name1</button>
+            <button type="button" id="buttonB">Name2</button>
+            <button type="button" id="buttonC">Name3</button>
           </article>
         </article>
       </section>
     </section>
-    <script src="main.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
